@@ -1,0 +1,17 @@
+port : "/dev/RoboteqDriver"
+baud : 115200
+wheelbase: 1.0
+radius: 0.105
+gear_ratio: 24.69
+max_rpm: 2650.0
+frequency : 50
+
+query:
+ encoder_count : "?C"
+ encoder_speed : "?S"
+ feedback : "?F"
+ fault_flag : "?FF"
+ status_flag: "?FM"
+
+
+

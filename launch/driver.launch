@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="robot_name"            default="$(env ROBOT_NAME)" />
+    <arg name="base_frame"            default="base_link" />
+    <arg name="output"                default="log" />
+    <arg name="common_modbus_ip"      default="192.168.1.110" />
+    <arg name="addr"                  default="" />
+    <arg name="dof"                   default="2" />
+    <arg name="stamped"               default="false" />
+
+
+    <!-- motor driver -->
+    <node name = "driver" pkg = "roboteq_driver" type = "roboteq_driver_node" output="$(arg output)" required='true'>
+        <rosparam command="load" file="$(find roboteq_driver)/config/motor_driver_config.yaml" />
+        <param name="port"  value="/dev/RoboteqDriver"/>
+        <param name="baud"  value="115200"/>
+    </node>
+
+    <node name = "encoder" pkg = "roboteq_driver" type = "roboteq_odom_node" output="$(arg output)" required='true'>
+        <rosparam command="load" file="$(find roboteq_driver)/config/odom_encoder_config.yaml" />
+        <param name="base_frame"            value="$(arg robot_name)/base_link"/>
+        <param name="odom_frame"            value="$(arg robot_name)/odom"/>
+        <param name="encoder_topic_name"   value="/$(arg robot_name)/driver/encoder_count" />
+        <param name="command_srv"          value="/$(arg robot_name)/driver/dualchannel_command_service" />
+        <param name="publish_tf"           value="true" /> 
+    </node>
+
+        <!-- DualShock4 -->
+    <node pkg="ds4_driver" type="ds4_driver_node.py" name="ds4_joystick" output="screen" >
+        <param name="backend" value="bluetooth" />
+        <param name="device_addr" value="" />
+        <param name="use_standard_msgs" value="false"/>
+    </node>
+    <node pkg="ds4_driver" type="ds4_twist_node_old.py" name="ds4_twist" output="screen" >
+        <rosparam command="load" file="$(find camel_robot)/config/bringup/ds4_2dof_config.yaml" />
+        <param name="stamped" value="false" />
+    </node>
+</launch>

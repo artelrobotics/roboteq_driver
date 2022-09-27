@@ -1,0 +1,13 @@
+wheelbase: 0.40
+radius: 0.105
+gear_ratio: 24.69
+max_rpm: 2650.0
+frequency : 50
+pub_rate: 10
+
+query:
+ encoder_count : "?C"
+ encoder_speed : "?S"
+ feedback : "?F"
+ fault_flag : "?FF"
+ status_flag: "?FM"
