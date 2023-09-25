@@ -166,12 +166,12 @@ void RoboteqDriver::cmd_vel_callback(const geometry_msgs::Twist &msg)
 
 double RoboteqDriver::calculate_right_speed(double x, double z)
 	{
-		return (2 * x + z * wheelbase) / (2 * radius);
+		return (2 * x - z * wheelbase) / (2 * radius);
 	}
 
 double RoboteqDriver::calculate_left_speed(double x, double z)
 	{
-		return (2 * x - z * wheelbase) / (2 * radius);
+		return (2 * x + z * wheelbase) / (2 * radius);
 	}
 
 double RoboteqDriver::to_rpm(double value)

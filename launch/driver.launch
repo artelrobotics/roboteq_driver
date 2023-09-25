@@ -12,7 +12,7 @@
     <!-- motor driver -->
     <node name = "driver" pkg = "roboteq_driver" type = "roboteq_driver_node" output="$(arg output)" required='true'>
         <rosparam command="load" file="$(find roboteq_driver)/config/motor_driver_config.yaml" />
-        <param name="port"  value="/dev/RoboteqDriver"/>
+        <param name="port"  value="/dev/ttyRoboteqDriver"/>
         <param name="baud"  value="115200"/>
     </node>
 
@@ -24,8 +24,7 @@
         <param name="command_srv"          value="/$(arg robot_name)/driver/dualchannel_command_service" />
         <param name="publish_tf"           value="true" /> 
     </node>
-
-        <!-- DualShock4 -->
+    <!-- DualShock4 -->
     <node pkg="ds4_driver" type="ds4_driver_node.py" name="ds4_joystick" output="screen" >
         <param name="backend" value="bluetooth" />
         <param name="device_addr" value="" />
