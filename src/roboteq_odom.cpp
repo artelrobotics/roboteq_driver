@@ -64,8 +64,8 @@ void RoboteqOdometry::initialize()
 void RoboteqOdometry::encoderCb(const roboteq_driver::channel_values& ticks)
 {
 
-	double l_enc = ticks.value[0];
-	double r_enc = ticks.value[1];
+	double l_enc = ticks.value[1];
+	double r_enc = ticks.value[0];
 
 	if((l_enc < encoder_low_wrap) && (prev_lencoder > encoder_high_wrap))
 	{
